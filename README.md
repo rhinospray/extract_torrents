@@ -7,7 +7,7 @@ For **rTorrent** users, this bash script will extract the original .torrents cor
 To install, just download to your preferred location, make executable, and edit to modify the default paths at the first lines of the script:
 * **SessionDir** is the *.sessions* directory as defined by the **session=** directive in *.rtorrent.rc*
 * **DownloadDir** is the base directory for torrent downloads as defined by the **directory=** directive in *.rtorrent.rc*
-* **OutputBaseDir** is the base directory where the .torrent files will be extracted
+* **OutputBaseDir** is the base directory where the .torrent files are to be extracted. It will be created if it doesn't exist.
 
 ### Details
 
@@ -17,7 +17,15 @@ For each active torrent in **rTorrent** there are three files kept in the *.sess
 * _infohash.torrent.rtorrent_ is a bencoded file with info and status data about the torrent.
 * _infohash.torrent.libtorrent_resume_ is a bencoded file with info to resume download and/or seeding after each restart.
 
-This script will extract bencoded data from the first two files, like original .torrent name, download name and path, tracker, label...estatus data a copy of the .torrent file (and two other accesory  , this scrThis script will extract active .torrents For rTorrent, extract active .torrents from .sessions, with original name and same subdir structure than downloads
+This script will extract bencoded data from the first two files, like original .torrent name, download name and path, tracker, label...
+
+With that info it will get a "human" name for the .torrent, either the original one, or an alternative name based on the download name, which makes easier to associate .torrents with their downloads. Many times both names are identical. This alternative name will also be used in some rare cases where the saved original name is blank or the infohash.
+
+It will also create a path for the .torrent that recreates the same directory structure used for downloads (if one exist). For example, if a torrent download is located at _/torrents/films/HDB/_ the corresponding .torrent file will be created at _/outputbasedir/films/HDB/_.  In fact, if you make OutputBaseDir=DownloadDir your .torrents will be created in the _same_ directory that their downloads.
+
+You can also filter the extraction by tracker or label. 
+
+### Usage
 
 Usage: `extract_torrents.sh [OPTION]...`
 
