@@ -1,5 +1,5 @@
 #!/bin/bash
-#--Defaault configuration data: modify for your installation
+#--Default configuration data: modify for your installation
 SessionDir="/home/rhino/.sessions/"
 DownloadDir="/home/rhino/torrents/"
 OutputBaseDir="/home/rhino/.torrents/"
