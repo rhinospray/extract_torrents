@@ -82,7 +82,7 @@ done
 shift $((OPTIND - 1))
 
 #------------------DEFINE FUNCTIONS------------------------------------------->
-# sustitute urlencoded characters like %20 by normal cgharacters
+# sustitute urlencoded characters like %20 by normal characters
 urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 # extract the value of key $1 from a bencoded file $2  ej:  bdecode x-filename  bencoded.txt
 bdecode() {
@@ -111,7 +111,7 @@ OutputBaseDir="${OutputBaseDir%/}/"
 for torfile in "$SessionDir"*.torrent
 do
   rtorfile="$torfile.rtorrent"
-#	--extract tracker name (as shown in rutorrent, i.e. hdbits-org ) from hash.torrent (key=announce)
+#	--extract tracker name (as shown in rutorrent, i.e. hdbits.org ) from hash.torrent (key=announce)
 	announce="$(bdecode announce $torfile)"
   domain="$(echo $announce  | sed -e "s/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/")"
   tracker="$(echo $domain | rev | cut -d. -f-2 | rev )"
